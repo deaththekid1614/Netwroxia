@@ -6,7 +6,7 @@
 
 <p align="center">
   <b>Autonomous AI NOC Copilot for Banking Networks</b><br>
-  <a href="#">IBM Z Datathon 2026</a> | <b>Team Astro_X</b> | Wildcard Entry<br>
+  <a href="#">IBM Z Datathon 2026</a> | <b>Team Astro_X</b> |<br>
   🔒 100% Air-Gapped &nbsp;|&nbsp; ☁️ Zero Cloud Dependency &nbsp;|&nbsp; 🏦 Banking-Grade
 </p>
 
