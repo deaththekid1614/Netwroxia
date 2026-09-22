@@ -1,0 +1,12 @@
+[
+  "average_response_ms",
+  "percent_packet_loss",
+  "count",
+  "state_ok",
+  "cpu_percent",
+  "mem_percent",
+  "router_BR-Koramangala",
+  "router_BR-Whitefield",
+  "router_HO-Chennai",
+  "router_ZO-Bengaluru"
+]

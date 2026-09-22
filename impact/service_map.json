@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0",
+  "description": "Banking service topology map. Defines which routers serve which banking services, user counts, revenue rates, and how failures propagate upstream/downstream. Consumed by B1 (health_score), B3 (impact_analyzer), B4 (business_impact), B6 (causal_graph).",
+
+  "regions": {
+    "south": {
+      "name": "South Region",
+      "routers": ["HO-Chennai", "ZO-Bengaluru", "BR-Koramangala", "BR-Whitefield"]
+    }
+  },
+
+  "services": {
+    "cbs_core_banking": {
+      "name": "Core Banking System",
+      "criticality": "critical",
+      "sla_uptime_pct": 99.9,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 5000000
+    },
+    "atm_cash_withdrawal": {
+      "name": "ATM Cash Withdrawal",
+      "criticality": "high",
+      "sla_uptime_pct": 95.0,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 100000
+    },
+    "atm_balance_inquiry": {
+      "name": "ATM Balance Inquiry",
+      "criticality": "medium",
+      "sla_uptime_pct": 95.0,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 20000
+    },
+    "upi_payments": {
+      "name": "UPI Payments",
+      "criticality": "high",
+      "sla_uptime_pct": 99.5,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 800000
+    },
+    "neft_transfers": {
+      "name": "NEFT Transfers",
+      "criticality": "high",
+      "sla_uptime_pct": 99.5,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 300000
+    },
+    "rtgs_transfers": {
+      "name": "RTGS Transfers",
+      "criticality": "critical",
+      "sla_uptime_pct": 99.9,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 400000
+    },
+    "swift_cross_border": {
+      "name": "SWIFT Cross-Border",
+      "criticality": "critical",
+      "sla_uptime_pct": 99.9,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 250000
+    },
+    "pos_transactions": {
+      "name": "POS Transactions",
+      "criticality": "medium",
+      "sla_uptime_pct": 98.0,
+      "rbi_mandated": false,
+      "revenue_per_min_inr": 50000
+    },
+    "internet_banking": {
+      "name": "Internet Banking",
+      "criticality": "high",
+      "sla_uptime_pct": 99.5,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 200000
+    },
+    "mobile_banking": {
+      "name": "Mobile Banking",
+      "criticality": "high",
+      "sla_uptime_pct": 99.5,
+      "rbi_mandated": true,
+      "revenue_per_min_inr": 150000
+    }
+  },
+
+  "routers": {
+    "HO-Chennai": {
+      "role": "head_office",
+      "region": "south",
+      "location": "Chennai",
+      "criticality": "critical",
+      "user_count": 2000,
+      "atms_served": 0,
+      "branches_served": 2,
+      "revenue_per_min_inr": 5000000,
+      "services_hosted": [
+        "cbs_core_banking",
+        "neft_transfers",
+        "rtgs_transfers",
+        "swift_cross_border",
+        "upi_payments",
+        "internet_banking",
+        "mobile_banking"
+      ]
+    },
+    "ZO-Bengaluru": {
+      "role": "zonal_office",
+      "region": "south",
+      "location": "Bengaluru",
+      "criticality": "high",
+      "user_count": 500,
+      "atms_served": 0,
+      "branches_served": 2,
+      "revenue_per_min_inr": 500000,
+      "services_hosted": [
+        "cbs_core_banking",
+        "upi_payments",
+        "neft_transfers"
+      ]
+    },
+    "BR-Koramangala": {
+      "role": "branch",
+      "region": "south",
+      "location": "Bengaluru - Koramangala",
+      "criticality": "medium",
+      "user_count": 800,
+      "atms_served": 3,
+      "branches_served": 1,
+      "revenue_per_min_inr": 200000,
+      "services_hosted": [
+        "atm_cash_withdrawal",
+        "atm_balance_inquiry",
+        "pos_transactions",
+        "upi_payments",
+        "cbs_core_banking"
+      ]
+    },
+    "BR-Whitefield": {
+      "role": "branch",
+      "region": "south",
+      "location": "Bengaluru - Whitefield",
+      "criticality": "medium",
+      "user_count": 700,
+      "atms_served": 2,
+      "branches_served": 1,
+      "revenue_per_min_inr": 175000,
+      "services_hosted": [
+        "atm_cash_withdrawal",
+        "atm_balance_inquiry",
+        "pos_transactions",
+        "upi_payments",
+        "cbs_core_banking"
+      ]
+    }
+  },
+
+  "propagation": {
+    "description": "Failure propagation map. If key router goes down, values (downstream routers) become unreachable from HO unless alternate paths exist. This topology has no alternate paths — every downstream router has a single point of failure.",
+    "HO-Chennai": ["ZO-Bengaluru"],
+    "ZO-Bengaluru": ["BR-Koramangala", "BR-Whitefield"],
+    "BR-Koramangala": [],
+    "BR-Whitefield": []
+  },
+
+  "notes": [
+    "Services hosted at a branch are the ones whose front-end equipment is co-located there. Backend processing (CBS queries) always routes to HO.",
+    "user_count is the number of customers actively served by that router at peak. Used for weighted health rollup.",
+    "revenue_per_min_inr is the estimated loss if this router is fully down for 1 minute.",
+    "branches_served counts branches that depend on this router for HO connectivity. HO serves 2 (both branches). ZO serves 2 (both branches). Branches serve only themselves.",
+    "propagation is critical for RCA: a HO failure cascades to all routers. A ZO failure cascades to both branches. A branch failure is isolated."
+  ]
+}

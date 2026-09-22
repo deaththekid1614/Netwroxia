@@ -1,0 +1,17 @@
+{
+  "incident_id": "INC-2025-001",
+  "title": "HO-Chennai upstream MPLS label stack corruption",
+  "occurred_at": "2025-11-15T14:22:00Z",
+  "resolved_at": "2025-11-15T14:31:00Z",
+  "severity": "CRITICAL",
+  "root_router": "HO-Chennai",
+  "root_role": "head_office",
+  "propagation_depth": 2,
+  "affected_routers": ["HO-Chennai", "ZO-Bengaluru", "BR-Koramangala", "BR-Whitefield"],
+  "affected_services": ["cbs_core_banking", "upi_payments", "neft_transfers", "rtgs_transfers", "swift_cross_border"],
+  "symptoms": ["high_latency", "elevated_jitter", "cbs_query_timeout"],
+  "root_cause": "MPLS L3VPN label stack corruption on HO-Chennai eth1 facing ZO. LDP session flapped, labels re-advertised, but stale LFIB entries persisted causing packet forwarding delays.",
+  "resolution": "Cleared LDP session (vtysh clear mpls ldp neighbor *). Labels re-converged in 23 seconds. Verified end-to-end CBS latency back to baseline.",
+  "recovery_time_min": 9,
+  "rbi_reportable": true
+}

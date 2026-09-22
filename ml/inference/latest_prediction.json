@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-30T04:45:00Z",
+  "timestamp": "2026-09-22T09:48:45Z",
   "models_used": {
     "xgboost": "XGBClassifier",
     "lstm": "LSTMPredictor"
@@ -19,14 +19,14 @@
         "future_fault_probability": 0.005,
         "predicted_future_fault": false,
         "time_to_impact": "5.0 min",
-        "tti_raw_steps": 4.99,
+        "tti_raw_steps": 4.98,
         "has_sequence_data": true,
         "status": "HEALTHY"
       },
       "combined_alert": "NORMAL",
       "top_feature": "state_ok",
       "raw_metrics": {
-        "latency_ms": 0.11,
+        "latency_ms": 0.17,
         "packet_loss_pct": 0.0,
         "ospf_neighbors": 0,
         "bgp_established": true,
@@ -53,7 +53,7 @@
       "combined_alert": "NORMAL",
       "top_feature": "state_ok",
       "raw_metrics": {
-        "latency_ms": 0.07,
+        "latency_ms": 0.14,
         "packet_loss_pct": 0.0,
         "ospf_neighbors": 0,
         "bgp_established": true,
@@ -70,7 +70,7 @@
         "status": "HEALTHY"
       },
       "lstm_forecast": {
-        "future_fault_probability": 0.0,
+        "future_fault_probability": 0.005,
         "predicted_future_fault": false,
         "time_to_impact": "5.0 min",
         "tti_raw_steps": 4.98,
@@ -80,7 +80,7 @@
       "combined_alert": "NORMAL",
       "top_feature": "state_ok",
       "raw_metrics": {
-        "latency_ms": 0.07,
+        "latency_ms": 0.16,
         "packet_loss_pct": 0.0,
         "ospf_neighbors": 0,
         "bgp_established": true,
@@ -91,7 +91,7 @@
     {
       "router": "BR-Whitefield",
       "xgboost": {
-        "fault_probability": 0.347,
+        "fault_probability": 0.014,
         "predicted_fault": false,
         "confidence": "LOW",
         "status": "HEALTHY"
@@ -105,10 +105,10 @@
         "status": "CRITICAL"
       },
       "combined_alert": "SUSPECTED_FAULT",
-      "top_feature": "percent_packet_loss",
+      "top_feature": "state_ok",
       "raw_metrics": {
         "latency_ms": 0.0,
-        "packet_loss_pct": 100.0,
+        "packet_loss_pct": 0.0,
         "ospf_neighbors": 0,
         "bgp_established": true,
         "cpu_pct": 0.0,

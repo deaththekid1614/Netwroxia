@@ -1,0 +1,17 @@
+{
+  "incident_id": "INC-2025-002",
+  "title": "BR-Koramangala leased-line congestion",
+  "occurred_at": "2025-12-03T09:14:00Z",
+  "resolved_at": "2025-12-03T09:22:00Z",
+  "severity": "MEDIUM",
+  "root_router": "BR-Koramangala",
+  "root_role": "branch",
+  "propagation_depth": 0,
+  "affected_routers": ["BR-Koramangala"],
+  "affected_services": ["atm_cash_withdrawal", "atm_balance_inquiry", "pos_transactions", "upi_payments"],
+  "symptoms": ["high_latency", "atm_slow_response"],
+  "root_cause": "Local leased-line carrier congested during morning peak. No fault in branch router itself — upstream carrier issue. ATM transactions slowed from 0.1s to 2.4s.",
+  "resolution": "Traffic rerouted via backup SD-WAN tunnel to ZO-Bengaluru. Carrier notified. ATM latency restored within 8 minutes.",
+  "recovery_time_min": 8,
+  "rbi_reportable": false
+}

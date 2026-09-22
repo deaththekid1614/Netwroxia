@@ -1,0 +1,17 @@
+{
+  "incident_id": "INC-2025-003",
+  "title": "BR-Whitefield branch router BGP session drop",
+  "occurred_at": "2026-01-08T03:47:00Z",
+  "resolved_at": "2026-01-08T03:58:00Z",
+  "severity": "MEDIUM",
+  "root_router": "BR-Whitefield",
+  "root_role": "branch",
+  "propagation_depth": 0,
+  "affected_routers": ["BR-Whitefield"],
+  "affected_services": ["atm_cash_withdrawal", "atm_balance_inquiry", "cbs_core_banking"],
+  "symptoms": ["bgp_peer_down", "packet_loss_partial", "cbs_query_timeout"],
+  "root_cause": "BGP session dropped after firmware event on branch router. iBGP peer 10.255.0.2 (ZO-Bengaluru) lost Established state for 4 minutes.",
+  "resolution": "Manual BGP clear on branch (vtysh clear ip bgp *). Session re-established with ZO. Traffic rerouted during the 4-minute window via SD-WAN backup.",
+  "recovery_time_min": 11,
+  "rbi_reportable": true
+}

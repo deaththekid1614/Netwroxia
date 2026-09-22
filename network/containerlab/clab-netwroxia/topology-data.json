@@ -1,0 +1,195 @@
+{
+  "name": "netwroxia",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-58607dd9ab61",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "3fff:172:20:20::/64",
+        "ipv6-gw": "3fff:172:20:20::1",
+        "external-access": true
+      }
+    }
+  },
+  "ssh-pub-keys": [],
+  "nodes": {
+    "br-koramangala": {
+      "index": "0",
+      "shortname": "br-koramangala",
+      "longname": "clab-netwroxia-br-koramangala",
+      "fqdn": "br-koramangala.netwroxia.io",
+      "group": "",
+      "labdir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/br-koramangala",
+      "kind": "linux",
+      "image": "frrouting/frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-58607dd9ab61",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/br-koramangala",
+        "clab-node-longname": "clab-netwroxia-br-koramangala",
+        "clab-node-name": "br-koramangala",
+        "clab-node-type": "",
+        "clab-owner": "death-kid",
+        "clab-topo-file": "/home/death-kid/IDE/netwroxia/network/containerlab/topology.yml",
+        "containerlab": "netwroxia"
+      },
+      "port-bindings": [
+      ]
+    },
+    "br-whitefield": {
+      "index": "1",
+      "shortname": "br-whitefield",
+      "longname": "clab-netwroxia-br-whitefield",
+      "fqdn": "br-whitefield.netwroxia.io",
+      "group": "",
+      "labdir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/br-whitefield",
+      "kind": "linux",
+      "image": "frrouting/frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-58607dd9ab61",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/br-whitefield",
+        "clab-node-longname": "clab-netwroxia-br-whitefield",
+        "clab-node-name": "br-whitefield",
+        "clab-node-type": "",
+        "clab-owner": "death-kid",
+        "clab-topo-file": "/home/death-kid/IDE/netwroxia/network/containerlab/topology.yml",
+        "containerlab": "netwroxia"
+      },
+      "port-bindings": [
+      ]
+    },
+    "ho-chennai": {
+      "index": "2",
+      "shortname": "ho-chennai",
+      "longname": "clab-netwroxia-ho-chennai",
+      "fqdn": "ho-chennai.netwroxia.io",
+      "group": "",
+      "labdir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/ho-chennai",
+      "kind": "linux",
+      "image": "frrouting/frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-58607dd9ab61",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/ho-chennai",
+        "clab-node-longname": "clab-netwroxia-ho-chennai",
+        "clab-node-name": "ho-chennai",
+        "clab-node-type": "",
+        "clab-owner": "death-kid",
+        "clab-topo-file": "/home/death-kid/IDE/netwroxia/network/containerlab/topology.yml",
+        "containerlab": "netwroxia"
+      },
+      "port-bindings": [
+      ]
+    },
+    "zo-bengaluru": {
+      "index": "3",
+      "shortname": "zo-bengaluru",
+      "longname": "clab-netwroxia-zo-bengaluru",
+      "fqdn": "zo-bengaluru.netwroxia.io",
+      "group": "",
+      "labdir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/zo-bengaluru",
+      "kind": "linux",
+      "image": "frrouting/frr:latest",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "3fff:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-58607dd9ab61",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/death-kid/IDE/netwroxia/network/containerlab/clab-netwroxia/zo-bengaluru",
+        "clab-node-longname": "clab-netwroxia-zo-bengaluru",
+        "clab-node-name": "zo-bengaluru",
+        "clab-node-type": "",
+        "clab-owner": "death-kid",
+        "clab-topo-file": "/home/death-kid/IDE/netwroxia/network/containerlab/topology.yml",
+        "containerlab": "netwroxia"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "endpoints": {
+        "a": {
+          "node": "ho-chennai",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:3b:ff:3a",
+          "peer": "z"
+        },
+        "z": {
+          "node": "zo-bengaluru",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:5a:9f:be",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "zo-bengaluru",
+          "interface": "eth2",
+          "mac": "aa:c1:ab:be:84:2a",
+          "peer": "z"
+        },
+        "z": {
+          "node": "br-koramangala",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:b3:37:db",
+          "peer": "a"
+        }
+      }
+    },
+    {
+      "endpoints": {
+        "a": {
+          "node": "zo-bengaluru",
+          "interface": "eth3",
+          "mac": "aa:c1:ab:54:00:bc",
+          "peer": "z"
+        },
+        "z": {
+          "node": "br-whitefield",
+          "interface": "eth1",
+          "mac": "aa:c1:ab:14:07:72",
+          "peer": "a"
+        }
+      }
+    }
+  ]
+}

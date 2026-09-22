@@ -1,0 +1,17 @@
+{
+  "incident_id": "INC-2025-004",
+  "title": "ZO-Bengaluru SD-WAN tunnel rekey failure",
+  "occurred_at": "2026-02-20T18:05:00Z",
+  "resolved_at": "2026-02-20T18:19:00Z",
+  "severity": "HIGH",
+  "root_router": "ZO-Bengaluru",
+  "root_role": "zonal_office",
+  "propagation_depth": 1,
+  "affected_routers": ["ZO-Bengaluru", "BR-Koramangala", "BR-Whitefield"],
+  "affected_services": ["cbs_core_banking", "upi_payments", "neft_transfers", "atm_cash_withdrawal"],
+  "symptoms": ["ipsec_rekey_failure", "high_latency", "elevated_jitter"],
+  "root_cause": "IPSec tunnel between ZO and HO failed to rekey due to clock skew on ZO's NTP client. Tunnel stayed up but degraded. Jitter climbed from 1ms to 47ms over 12 minutes.",
+  "resolution": "Restarted IPSec daemon on ZO. NTP client re-synced. Tunnel re-established. Reviewed rekey policy — reduced interval from 60min to 30min.",
+  "recovery_time_min": 14,
+  "rbi_reportable": true
+}

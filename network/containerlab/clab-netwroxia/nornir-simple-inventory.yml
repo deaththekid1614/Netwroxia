@@ -1,0 +1,21 @@
+---
+br-koramangala:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.4
+br-whitefield:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.2
+ho-chennai:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.3
+zo-bengaluru:
+    username: 
+    password: 
+    platform: linux
+    hostname: 172.20.20.5

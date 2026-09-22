@@ -1,4 +1,94 @@
+cd ~/IDE/netwroxia
 
-# Large LLM model weights (download separately)
-*.gguf
+cat > .gitignore << 'EOF'
+# ── Python ─────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ── Virtual environments ───────────────────────────────────────
+venv/
+.venv/
+env/
+ENV/
+
+# ── IDE / Editor ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+nano.save
+*.orig
+
+# ── OS ─────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Large model files (download separately) ────────────────────
 copilot/llm/*.gguf
+copilot/llm/*.bin
+*.gguf
+
+# ── Runtime state / generated artifacts ────────────────────────
+beacons/.beacon_seq.json
+beacons/.beacon_miss_counter.json
+fault_sim/active_faults.json
+incidents/incidents.db
+incidents/incidents.db-journal
+incidents/incidents.db-wal
+incidents/incidents.db-shm
+incidents/snapshots/*.json
+remediation/engine/pending_approval.json
+remediation/engine/escalations/*.json
+audit/audit_logs/*.jsonl
+ml/inference/latest_prediction.json
+copilot/llm/latest_copilot_response.json
+
+# ── Generated latest-* outputs (regenerable) ───────────────────
+analytics/latest_*.json
+beacons/latest_*.json
+impact/latest_*.json
+rca/latest_*.json
+explain/latest_*.json
+mlops/latest_*.json
+mlops/prediction_history.jsonl
+reports/daily/*.json
+reports/weekly/*.json
+reports/incidents/*.json
+
+# ── Large ML data (regenerable from InfluxDB) ──────────────────
+ml/data/raw/*.csv
+ml/data/processed/*.npy
+ml/data/labels/*.csv
+
+# ── ChromaDB (regenerable from knowledge_base) ─────────────────
+copilot/rag/chroma_db/
+
+# ── Backup files from development ──────────────────────────────
+*.bak
+*.bak2
+*.old
+*.py.bak
+*.py.old
+*.py.bak2
+README.md.bak
+EOF
+
+# Remove stray backup files from working tree
+rm -f README.md.bak nano.save
+rm -f dashboard/app_v2.py.bak
+rm -f remediation/actions/_base.py.bak2 remediation/actions/_base.py.old
+rm -f remediation/engine/orchestrator.py.bak
+rm -f analytics/sla_tracker.py.bak analytics/trend_engine.py.bak
+rm -f telemetry/telegraf/telegraf.conf.bak
+
+echo "[OK] .gitignore written, backup files removed"

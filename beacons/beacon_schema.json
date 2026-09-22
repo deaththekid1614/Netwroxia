@@ -1,0 +1,137 @@
+{
+  "schema_version": "1.0",
+  "description": "Netwroxia Beacon Heartbeat Schema. Defines the packet structure, InfluxDB layout, status thresholds, and baseline parameters for the router-to-HO heartbeat system.",
+  "influxdb": {
+    "database": "netwroxia",
+    "measurement": "beacon",
+    "retention_days": 7
+  },
+  "fields": {
+    "seq": {
+      "type": "integer",
+      "description": "Monotonic sequence counter per source router. Increments by 1 each cycle. Gaps indicate missed beacons."
+    },
+    "rtt_ms": {
+      "type": "float",
+      "description": "Average round-trip time in milliseconds across ping_count probes."
+    },
+    "rtt_min_ms": {
+      "type": "float",
+      "description": "Minimum RTT observed in this cycle."
+    },
+    "rtt_max_ms": {
+      "type": "float",
+      "description": "Maximum RTT observed in this cycle."
+    },
+    "loss_pct": {
+      "type": "float",
+      "description": "Packet loss percentage (0.0 to 100.0) across ping_count probes."
+    },
+    "status_code": {
+      "type": "integer",
+      "description": "0 = OK, 1 = DEGRADED, 2 = CRITICAL, 3 = MISSING"
+    },
+    "baseline_rtt_ms": {
+      "type": "float",
+      "description": "Rolling baseline RTT for this router at time of write. Populated by baseline_engine.py; 0.0 on first cycle."
+    },
+    "deviation_pct": {
+      "type": "float",
+      "description": "Percent deviation of current RTT from baseline. Formula: ((rtt_ms - baseline_rtt_ms) / baseline_rtt_ms) * 100. 0.0 if no baseline yet."
+    }
+  },
+  "tags": {
+    "src_router": {
+      "type": "string",
+      "description": "Name of the router sending the beacon. One of: ZO-Bengaluru, BR-Koramangala, BR-Whitefield."
+    },
+    "dst_router": {
+      "type": "string",
+      "description": "Name of the beacon receiver. Always HO-Chennai for this topology."
+    },
+    "path": {
+      "type": "string",
+      "description": "Logical path label. Format: '<src>-><dst>'. Example: 'ZO-Bengaluru->HO-Chennai'."
+    }
+  },
+  "status_thresholds": {
+    "OK": {
+      "rtt_multiplier_max": 1.5,
+      "loss_pct_max": 1.0,
+      "description": "RTT within 1.5x baseline AND loss <= 1%. Healthy path."
+    },
+    "DEGRADED": {
+      "rtt_multiplier_max": 3.0,
+      "loss_pct_max": 10.0,
+      "description": "RTT between 1.5x and 3.0x baseline OR loss between 1% and 10%. Elevated risk."
+    },
+    "CRITICAL": {
+      "rtt_multiplier_max": 10.0,
+      "loss_pct_max": 50.0,
+      "description": "RTT between 3.0x and 10.0x baseline OR loss between 10% and 50%. Impending failure."
+    },
+    "MISSING": {
+      "loss_pct_min": 100.0,
+      "description": "100% loss OR no beacon received within 3x collection interval. Path down."
+    }
+  },
+  "baseline": {
+    "window_minutes": 60,
+    "min_samples": 30,
+    "fallback_rtt_ms": 25.0,
+    "recompute_interval_seconds": 60,
+    "description": "Baseline uses a 60-minute rolling window. If fewer than 30 samples exist, fallback_rtt_ms is used. Baselines recomputed every 60 seconds by baseline_engine.py."
+  },
+  "collection": {
+    "interval_seconds": 10,
+    "ping_count": 3,
+    "timeout_seconds": 5,
+    "max_missed_before_missing": 3,
+    "description": "Each router is probed every 10 seconds with 3 ICMP packets and a 5-second timeout. If 3 consecutive cycles return no response, status becomes MISSING."
+  },
+  "routers": [
+    {
+      "name": "HO-Chennai",
+      "role": "head_office",
+      "sends_beacon": false,
+      "receives_beacon": true,
+      "loopback": "10.255.0.1",
+      "container": "clab-netwroxia-ho-chennai"
+    },
+    {
+      "name": "ZO-Bengaluru",
+      "role": "zonal_office",
+      "sends_beacon": true,
+      "receives_beacon": false,
+      "loopback": "10.255.0.2",
+      "container": "clab-netwroxia-zo-bengaluru"
+    },
+    {
+      "name": "BR-Koramangala",
+      "role": "branch",
+      "sends_beacon": true,
+      "receives_beacon": false,
+      "loopback": "10.255.0.3",
+      "container": "clab-netwroxia-br-koramangala"
+    },
+    {
+      "name": "BR-Whitefield",
+      "role": "branch",
+      "sends_beacon": true,
+      "receives_beacon": false,
+      "loopback": "10.255.0.4",
+      "container": "clab-netwroxia-br-whitefield"
+    }
+  ],
+  "storage_paths": {
+    "baselines_file": "beacons/latest_baselines.json",
+    "state_file": "beacons/latest_beacon_state.json",
+    "sequence_file": "beacons/.beacon_seq.json"
+  },
+  "notes": [
+    "The 'container' field in routers[] must be verified against topology.yml before A2 is written.",
+    "The 'loopback' field is used as the ping target from the source router's container to HO-Chennai.",
+    "sequence_file '.beacon_seq.json' is a hidden state file tracking last seq per router to detect gaps.",
+    "All timestamps written to InfluxDB are UTC nanoseconds (InfluxDB 1.8 default)."
+  ]
+}

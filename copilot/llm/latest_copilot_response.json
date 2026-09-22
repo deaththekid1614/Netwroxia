@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-30T04:45:03.807518Z",
+  "timestamp": "2026-07-30T14:25:02.279966Z",
   "model": "mistral-7b-instruct-v0.2.Q4_K_M",
   "mode": "fast",
   "predictions_analyzed": 1,
@@ -31,7 +31,7 @@
       "deep_fix": "Upgrade leased line from 100 Mbps to 1 Gbps. Add a second backup path (dark fiber via Hosur Road). Install WAN optimizer for CBS traffic. Do this during Sunday maintenance window.",
       "rbi_compliance_note": "RBI requires 99.9% uptime for core banking. Current 500ms delay breaches the 100ms SLA for ATM transactions. If this link fails, we have 4 hours to restore CBS, 2 hours for ATM network. Must fix before SLA breach triggers P1 report to RBI.",
       "router": "BR-Whitefield",
-      "timestamp": "2026-07-30T04:45:03.807304Z",
+      "timestamp": "2026-07-30T14:25:02.279852Z",
       "model": "mistral-7b-instruct-v0.2.Q4_K_M (fast-mode)",
       "note": "FAST MODE: Real Mistral output cached for demo speed"
     }

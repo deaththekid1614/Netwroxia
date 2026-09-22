@@ -18,12 +18,20 @@ DB_NAME = "netwroxia"
 TIMEOUT = 30
 DEFAULT_HOURS = 48
 
-# IP → router mapping for ping metrics
+# URL → router mapping for ping metrics.
+# Legacy keys (IPs) kept so historical data still resolves.
+# New keys (hostnames) used after A6 telegraf.conf change.
 IP_TO_ROUTER = {
+    # Legacy (pre-A6)
     "172.20.20.3": "HO-Chennai",
     "172.20.20.4": "ZO-Bengaluru",
     "172.20.20.5": "BR-Koramangala",
     "172.20.20.7": "BR-Whitefield",
+    # Current (post-A6)
+    "clab-netwroxia-ho-chennai": "HO-Chennai",
+    "clab-netwroxia-zo-bengaluru": "ZO-Bengaluru",
+    "clab-netwroxia-br-koramangala": "BR-Koramangala",
+    "clab-netwroxia-br-whitefield": "BR-Whitefield",
 }
 
 # Containerlab router container names → banking names
