@@ -715,9 +715,6 @@ $ python3 remediation/engine/orchestrator.py cycle
 | **Chaithanya BS** | chaithanyabs441@gmail.com |
 | **Karthik Jagadeeschandran** | batkarthik646@gmail.com |
 
-**IBM Z Datathon 2026 — Wildcard Entry**
-
-> Developed on **IBM BOB** — Primary development platform for the entire Netwroxia pipeline.
 
 ---
 
