@@ -726,7 +726,6 @@ $ python3 remediation/engine/orchestrator.py cycle
 - [TheBloke](https://huggingface.co/TheBloke) — quantized LLM models
 - [InfluxData](https://www.influxdata.com/) — time-series database
 - [Streamlit](https://streamlit.io/) — dashboard framework
-- IBM Z Datathon 2026 organizers
 
 ---
 
